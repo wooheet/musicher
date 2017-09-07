@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="musicher.pay.dto">
+   	<insert id="insert" parameterType="paydto">
+		insert into musicpay values (#{pay_id},#{mem_id},sysdate,#{price})
+	</insert> 
+	<select id="paylist" resultType="paydto" parameterType="String">
+		select * from musicpay where mem_id=#{mem_id}
+	</select>  
+	<select id="payPresent" resultType="paydto2" parameterType="String">
+		select * from (select * from musicpay where mem_id=#{mem_id} order by pay_id desc) where rownum= 1
+	</select> 
+</mapper>

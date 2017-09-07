@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="musicher.music.dto">
+   	
+	<select id="mymusiclist" resultType="mylistdto" parameterType="String">
+		select distinct m.music_id as music_id, m.title as title, m.singer_id as singer 
+		from playlist p, music m 
+		where p.music_id=m.music_id and p.mem_id=#{mem_id}
+	</select> 
+	<delete id="deletemymusic" parameterType="map">
+		delete from playlist where music_id = #{music_id} and mem_id=#{mem_id}
+	</delete>
+	<insert id="insertmymusic" parameterType="map">		
+		insert into playlist values(#{playlist_id},#{mem_id},#{music_id})
+	</insert>
+	
+</mapper>

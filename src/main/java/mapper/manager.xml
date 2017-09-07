@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="musicher.manager.dto">
+   
+
+	
+	<select id="musiclist" resultType="MusicDTO" >
+		<![CDATA[
+			select m.music_id, m.title, m.save, g.grname as genre, m.singer_id as singer
+			from music m, genre g
+			where m.genre_id = g.genre_id
+		]]>
+	</select>
+	
+	
+	
+	<!-- stat play테이블로 바꾸기-->
+
+	<select id="musicRank" resultType="rankDTO">
+		<![CDATA[
+			select rownum as ranking,count as value,m.title as name from
+			(select count(music_id) as count,music_id from playlist
+			group by music_id
+			order by count(music_id) desc) x,music m
+			where rownum <= 5 and x.music_id=m.music_id
+		]]>
+	</select>
+	
+	<select id="genreRank" resultType="rankDTO">
+		<![CDATA[
+			select rownum as ranking,count as value,grname as name from
+			(select count(g.grname) as count,g.grname
+			from playlist p, music m,genre g
+			where p.music_id=m.music_id and m.genre_id=g.genre_id
+			group by g.grname
+			order by count(g.grname) desc)
+			where rownum<=5
+		]]>
+	</select>
+	
+	<select id="singerRank" resultType="rankDTO">
+		<![CDATA[
+			select rownum as ranking,count as value,singer_id as name from 
+			(select count(m.singer_id) as count,m.singer_id
+			from playlist p,music m
+			where p.music_id=m.music_id
+			group by m.singer_id
+			order by count(m.singer_id) desc)
+			where rownum<=5
+		]]>
+	</select>
+	
+		
+	<select id="ranklist" resultType="rankDTO" parameterType="String">
+		<![CDATA[
+			select rownum as ranking,gr.grname name
+			from like_tb lk, genre gr
+			where lk.LIKE_GROUP=#{group} and lk.VALUE=gr.GENRE_ID
+			order by lk.count
+		]]>
+	</select>
+	
+	<insert id="musicinsert" parameterType="uploaddbdto">
+		insert into music values (#{music_id},#{title},#{save},#{gerne_id},#{singer_id})
+	</insert>
+	
+	<insert id="blockmusicinsert" parameterType="MusicStampdto">
+		insert into blockostamp values (#{musicHash},#{stampId})
+	</insert>
+
+	<select id="musiccount" resultType="Integer" >
+		select count(*) from music
+	</select>
+	
+	<select id="membercount" resultType="Integer" >
+		select count(*) from member
+	</select>
+	
+	
+</mapper>

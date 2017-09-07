@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+  		<typeAlias type="musicher.member.dto.memberDTO" alias="member"/>
+  		<typeAlias type="musicher.genre.dto.genreDTO" alias="genre"/>
+  		<typeAlias type="musicher.manager.dto.FileUploadDTO" alias="upFile"/>
+  		<typeAlias type="musicher.manager.dto.rankDTO" alias="rankDTO"/>
+  		<typeAlias type="musicher.manager.dto.MusicListDTO" alias="MusicDTO"/>
+  		<typeAlias type="musicher.manager.dto.UploadDbDTO" alias="uploaddbdto"/>
+  		<typeAlias type="musicher.manager.dto.MusicStampDTO" alias="MusicStampdto"/>
+  		<typeAlias type="musicher.pay.dto.payDTO" alias="paydto"/>
+  		<typeAlias type="musicher.music.dto.mylistDTO" alias="mylistdto"/>
+  		<typeAlias type="musicher.pay.dto.payDTO2" alias="paydto2"/>
+  		<typeAlias type="musicher.recommend.dto.recommendDTO" alias="recommend"/>
+  	</typeAliases>
+  	<mappers>
+  		<mapper resource="mapper/member.xml"/>
+  		<mapper resource="mapper/genre.xml"/>
+  		<mapper resource="mapper/manager.xml"/>
+  		<mapper resource="mapper/pay.xml"/>
+  		<mapper resource="mapper/mymusic.xml"/>
+  		<mapper resource="mapper/recommend.xml"/>
+  	</mappers>	
+</configuration>
