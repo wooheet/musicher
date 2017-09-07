@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="musicher.genre.dto">
+   
+	
+	<select id="grlist" resultType="genre" parameterType="String">
+		select * from genre where high=#{high}
+	</select>
+	
+	
+	<select id="genre_id" resultType="genre" parameterType="String">
+		select * from genre where genre_id=#{genre_id}
+	</select>
+   
+</mapper>

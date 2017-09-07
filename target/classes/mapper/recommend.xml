@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="musicher.recommend.dto">
+   	<insert id="insert" parameterType="recommend">
+		insert into recommendMusic values (#{userID},#{musicID},#{click})
+	</insert>
+	
+	<select id="isNull" parameterType="Map" resultType="int">
+		select count(*) from recommendMusic where userID=#{userID} and musicID=#{musicID}
+	</select>
+   
+   	<select id="clickNum" parameterType="Map" resultType="recommend"><!--  resultType="emp"-->
+		select * from recommendMusic where userID=#{userID} and musicID=#{musicID}
+	</select>
+	
+	<update id="update" parameterType="recommend">
+		update recommendMusic set click=#{click} where  userID=#{userID} and musicID=#{musicID}
+	</update>
+</mapper>
